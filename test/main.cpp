@@ -1,4 +1,6 @@
-#include "tst_bigdecimaltest.h"
+#include "tst_bigdecimalconstructortest.h"
+#include "tst_bigdecimalsumoperatortest.h"
+#include "tst_bigdecimalsubtractoperatortest.h"
 
 #include <gtest/gtest.h>
 

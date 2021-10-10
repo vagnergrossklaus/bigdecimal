@@ -4,18 +4,11 @@
 
 #include <bigdecimal/bigdecimal.h>
 
-class BigDecimalTest : public ::testing::TestWithParam<std::tuple<float, int, int, int> > {
-protected:
-    BigDecimalTest() {}
-    ~BigDecimalTest() override {}
+class BigDecimalConstructorTest : public ::testing::TestWithParam<std::tuple<float, int, int, int> > {};
 
-    void SetUp() override {}
-    void TearDown() override {}
-};
-
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     testBigDecimalConstructor,
-    BigDecimalTest,
+    BigDecimalConstructorTest,
     ::testing::Values(
         std::make_tuple( 0.00, 0, 0, 0 ),
         std::make_tuple( 0.00, 1, 0, 0 ),
@@ -47,27 +40,13 @@ INSTANTIATE_TEST_CASE_P(
         )
     );
 
-TEST_P( BigDecimalTest, testBigDecimalConstructor ) {
+TEST_P( BigDecimalConstructorTest, testConstructor ) {
 
-    auto [value, precision, intPart, fractPart] = GetParam();
+    std::tuple<float, int, int, int> params = GetParam();
 
-    BigDecimal decimal( value, precision );
+    BigDecimal decimal( std::get<0>( params ), std::get<1>( params ) );
 
-    EXPECT_EQ( decimal.intPart(), intPart );
-    EXPECT_EQ( decimal.fractPart(), fractPart );
-
-}
-
-TEST_P( BigDecimalTest, testBigDecimalSumOperator ) {
-
-    auto [value, precision, intPart, fractPart] = GetParam();
-
-    BigDecimal decimal01( 1, 0 );
-    BigDecimal decimal02( 1, 0 );
-
-    BigDecimal decimalSum = decimal01 + decimal02;
-
-    EXPECT_EQ( decimalSum.intPart(), 2 );
-    EXPECT_EQ( decimalSum.fractPart(), 0 );
+    EXPECT_EQ( decimal.intPart(), std::get<2>( params ) );
+    EXPECT_EQ( decimal.fractPart(), std::get<3>( params ) );
 
 }

@@ -42,7 +42,9 @@ include_directories(${GTestIncludes})
 
 add_executable(BigDecimalTest
     main.cpp
-    tst_bigdecimaltest.h
+    tst_bigdecimalconstructortest.h
+    tst_bigdecimalsumoperatortest.h
+    tst_bigdecimalsubtractoperatortest.h
     ${GTestFiles}
 )
 
